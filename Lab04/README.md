@@ -11,10 +11,10 @@ The property `apikey` and `kafka_admin_url` of the service credential of your Ev
 
 1. Login to your web terminal.
 
-1. Retrieve the service credential of your Event Streams Service. The command returns everything of the service credential of your Event Streams Service.
+1. Retrieve the service credential of your Event Streams Service by the credential name. The command returns everything of the service credential of your Event Streams Service. For example, if you have `Service credentail-1` as your credential name, the following sample command retrieves your credential.
 
 	```shell
-	$ ibmcloud resource service-key "${ES_SVC_NAME}-credentials1"
+	$ ibmcloud resource service-key "Service credentials-1"
 
 	Retrieving service key account-eventstreams-user8888-credentials1 in resource group workshop-nov2019 under account Account as me@email.com...
                   
