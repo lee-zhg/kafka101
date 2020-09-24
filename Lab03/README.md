@@ -17,7 +17,7 @@ To create a Spring application,
 1. Navigate to the `/userdata` folder.
 
 	```shell
-	$ cd /userdata
+	$ cd ~
 	```
 
 1. Review a complete list of supported dependencies.
@@ -41,11 +41,38 @@ To create a Spring application,
 	$ cd spring-boot-kafka-app/
 	```
 
-1. Retrieve the Event Streams service credentials.
+1. Retrieve the service credential of your Event Streams Service by the credential name. The command returns everything of the service credential of your Event Streams Service. For example, if you have `Service credentail-1` as your credential name, the following sample command retrieves your credential.
 
 	```shell
-	$ ibmcloud resource service-key "${ES_SVC_NAME}-credentials1"
+	$ ibmcloud resource service-key "Service credentials-1"
+
+	Retrieving service key account-eventstreams-user8888-credentials1 in resource group workshop-nov2019 under account Account as me@email.com...
+                  
+	Name:          account-eventstreams-user8888-credentials1   
+	ID:            crn:v1:bluemix:public:messagehub:us-south:a/accf1c23dd456789befedcd0cda123e4:56ce78aa-d9a0-1c23-34ce-5a6cf7bd8d90:resource-key:1fe2ad34-5678-90fe-12d3-d4567d890c12   
+	Created At:    Thu Oct 31 03:18:44 UTC 2019   
+	State:         active   
+	Credentials:                                   
+               api_key:                  someapikey      
+               apikey:                   someapikey      
+               iam_apikey_description:   Auto-generated for key someapikey     
+               iam_apikey_name:          account-eventstreams-user8888-credentials1      
+               iam_role_crn:             crn:v1:bluemix:public:iam::::serviceRole:Manager      
+               iam_serviceid_crn:        crn:v1:bluemix:public:iam-identity::a/accf1c23dd456789befedcd0cda123e4::serviceid:ServiceId-123456789      
+               instance_id:              56ce78aa-d9a0-1c23-34ce-5a6cf7bd8d90      
+               kafka_admin_url:          https://a12bcdefg3hij45.svc01.us-south.eventstreams.cloud.ibm.com      
+               kafka_brokers_sasl:       [broker-1-a1bc2d3efg4hijkl.kafka.svc01.us-south.eventstreams. cloud.ibm.com:9999,
+				broker-2-a1bc2d3efg4hijkl.kafka.svc01.us-south.eventstreams.cloud.ibm.com:9999,
+				broker-3-a1bc2d3efg4hijkl.kafka.svc01.us-south.eventstreams.cloud.ibm.com:9999,
+				broker-4-a1bc2d3efg4hijkl.kafka.svc01.us-south.eventstreams.cloud.ibm.com:9999,
+				broker-5-a1bc2d3efg4hijkl.kafka.svc01.us-south.eventstreams.cloud.ibm.com:9999,
+				broker-6-a1bc2d3efg4hijkl.kafka.svc01.us-south.eventstreams.cloud.ibm.com:9999]      
+               kafka_http_url:           https://a12bcdefg3hij45.svc01.us-south.eventstreams.cloud.ibm.com      
+               password:                 123abc4567sdagdh2678akd7890hh      
+               user:                     token 
 	```
+
+	> Note: your service credential of your Event Streams Service is also available in IBM Cloud console.
 
 1. Extract the following information from the service credential of your Event Streams Service.
 	* `username` (always set to `token`)
