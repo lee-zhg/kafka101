@@ -16,21 +16,21 @@ Kafka CLI version 2.3.0 has been downloaded and installed in the web terminal en
 1. Go to the Kafka distribution directory which is in folder `/userdata/kafka_2.12-2.3.0`.
 
 	```console
-	$ cd /userdata/kafka_2.12-2.3.0
+	$ cd ~/kafka_2.12-2.3.0
 	```
 
 1. Locate your Event Streams Service.
 
 	```console
-	$ ibmcloud resource service-instances | grep $ES_SVC_NAME
+	$ ibmcloud resource service-instances | "grep $ES_SVC_NAME"
 	
-		$ ibmcloud resource service-instance $ES_SVC_NAME
+	$ ibmcloud resource service-instance "$ES_SVC_NAME"
 	```
 	
-1. Retrieve the service credential of your Event Streams Service. The command returns everything of the service credential of your Event Streams Service.
+1. Retrieve the service credential of your Event Streams Service by the credential name. The command returns everything of the service credential of your Event Streams Service. For example, if you have `Service credentail-1` as your credential name, the following sample command retrieves your credential.
 
 	```shell
-	$ ibmcloud resource service-key "${ES_SVC_NAME}-credentials1"
+	$ ibmcloud resource service-key "Service credentials-1"
 
 	Retrieving service key account-eventstreams-user8888-credentials1 in resource group workshop-nov2019 under account Account as me@email.com...
                   
@@ -174,12 +174,12 @@ Consumers can be labeled with a consumer group name, so that each record publish
 
 1. Copy the output to the clipboard.
 
-1. Open 3 new browser tabs and start new web terminal session in each tab.
+1. Open 3 new web terminal sessions.
 
 1. In each new terminal, you need to set the $KAFKA_BROKERS_SASL variable.
 
 	```shell
-	$ cd /userdata/kafka_2.12-2.3.0
+	$ cd ~/kafka_2.12-2.3.0
 
 	$ export KAFKA_BROKERS_SASL="broker-1-a1bc2d3efg4hijkl.kafka.svc01.us-south.eventstreams. cloud.ibm.com:9999,broker-2-a1bc2d3efg4hijkl.kafka.svc01.us-south.eventstreams.cloud.ibm.com:9999, broker-3-a1bc2d3efg4hijkl.kafka.svc01.us-south.eventstreams.cloud.ibm.com:9999, broker-4-a1bc2d3efg4hijkl.kafka.svc01.us-south.eventstreams.cloud.ibm.com:9999, broker-5-a1bc2d3efg4hijkl.kafka.svc01.us-south.eventstreams.cloud.ibm.com:9999, broker-6-a1bc2d3efg4hijkl.kafka.svc01.us-south.eventstreams.cloud.ibm.com:9999"
 	```
