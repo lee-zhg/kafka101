@@ -187,7 +187,7 @@ You run couple of Kafka CLI commands in this section.
 Additional information of using the Event Streams CLI is available in [Lab05](../Lab05/README.md).
 
 
-## Install Spring Boot,
+## Install Spring Boot
 
 To install Spring Boot,
 
