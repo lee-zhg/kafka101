@@ -1,124 +1,51 @@
-# Kafka Lab 5 - Event Streams CLI
+# Apache Kafka 101
 
-Event Streams CLI commands is explored in this exercise.
 
-1. List the Event Streams CLI Plugin commands.
+## Apache Kafka® is a distributed streaming platform
 
-	```console
-	$ ibmcloud es -h
+A streaming platform has three key capabilities:
 
-	NAME:
-	ibmcloud es - Plugin for IBM Event Streams (build 1908221834)
+* Publish and subscribe to streams of records, similar to a message queue or enterprise messaging system.
+* Store streams of records in a fault-tolerant durable way.
+* Process streams of records as they occur. 
 
-	USAGE:
-	ibmcloud es command [arguments...] [command options]
+Kafka is generally used for two broad classes of applications:
 
-	COMMANDS:
-	----------------------------------------------------------------------------------------------------------------------------------------
+* Building real-time streaming data pipelines that reliably get data between systems or applications
+* Building real-time streaming applications that transform or react to the streams of data 
 
-	broker                 Display details of a broker.
-	broker-config          Display broker configuration.
-	cluster                Display details of the cluster.
-	group                  Display details of a consumer group.
-	group-delete           Delete a consumer group.
-	group-reset            Reset the offsets for a consumer group.
-	groups                 List the consumer groups.
-	init                   Initialize the IBM Event Streams plugin.
-	topic                  Display details of a topic.
-	topic-create           Create a new topic.
-	topic-delete           Delete a topic.
-	topic-delete-records   Delete records from a topic before a given offset.
-	topic-partitions-set   Set the partitions for a topic.
-	topic-update           Update the configuration for a topic.
-	topics                 List the topics.
-	help, h                Show help
+To understand how Kafka does these things, let's dive in and explore Kafka's capabilities from the bottom up.
 
-	```
+First a few concepts:
 
-1. Create an instance of the IBM Event Streams service. Replace `<username>` with your username to make it unique.
+* Kafka is run as a cluster on one or more servers that can span multiple datacenters.
+* The Kafka cluster stores streams of records in categories called topics.
+* Each record consists of a key, a value, and a timestamp. 
 
-	```console
-	$ ibmcloud resource service-instance-create <username>-eventstreams messagehub standard us-south
+Kafka has four core APIs:
 
-	Creating service instance remkohdev-eventstreams in resource group default of account USER1's Account as user1@email.com...
-	OK
-	Service instance user1-eventstreams was created.
-					
-	Name:         user1-eventstreams   
-	ID:           crn:v1:bluemix:public:messagehub:us-south:a/1ab2c3de456789fg01h23i4j5k6l78mn:12a34bc5-de67-8f9g-h012-34i567jk8901::   
-	GUID:         12a34bc5-de67-8f9g-h012-34i567jk8901   
-	Location:     us-south   
-	State:        active   
-	Type:         service_instance   
-	Sub Type:        
-	Created at:   2019-10-17T15:04:16Z   
-	Updated at:   2019-10-17T15:04:16Z
-	```
+* The Producer API allows an application to publish a stream of records to one or more Kafka topics.
+* The Consumer API allows an application to subscribe to one or more topics and process the stream of records produced to them.
+* The Streams API allows an application to act as a stream processor, consuming an input stream from one or more topics and producing an output stream to one or more output topics, effectively transforming the input streams to output streams.
+* The Connector API allows building and running reusable producers or consumers that connect Kafka topics to existing applications or data systems. For example, a connector to a relational database might capture every change to a table. 
 
-1. Initialize the Event Streams CLI Plugin.
+    ![Kafka Architecture](images/kafka-architecture.png)
 
-	```console
-	$ ibmcloud es init
+In Kafka the communication between the clients and the servers is done with a simple, high-performance, language agnostic TCP protocol. This protocol is versioned and maintains backwards compatibility with older version. We provide a Java client for Kafka, but clients are available in many languages.
 
-	API Endpoint: 	https://123abc4d5efgh67i.svc01.us-south.eventstreams.cloud.ibm.com
-	OK
-	```
 
-1. Create a new topic called `greetings2`.
+## Labs
 
-	```console
-	$ ibmcloud es topic-create greetings2 --partitions 1
+Basic Kafka features and functionalities are explored during the lab.
 
-	Created topic greetings
-	OK
-	```
+* Lab01 - [Setup](Lab01/README.md)
+* Lab02 - [Produce and Consume Messages to a Kafka Stream with Kafka CLI Tools](Lab02/README.md)
+* Lab03 - [Produce and Consume Messages to a Kafka Stream with Spring Boot](Lab03/README.md)
+* Lab04 - [Event Streams Admin API](Lab04/README.md)
+* Lab05 - [Event Streams CLI](Lab05/README.md)
 
-1. Display details of a topic.
 
-	```console
-	$ ibmcloud es topic greetings2
+## References
 
-	Details for topic greetings
-	Topic name   Internal?   Partition count   Replication factor   
-	greetings    false       1                 3   
-
-	Partition details for topic greetings
-	Partition ID   Leader   Replicas   In-sync   
-	0              2        [2 0 1]    [2 0 1]   
-
-	Configuration parameters for topic greetings
-	Name                  Value   
-	cleanup.policy        delete   
-	min.insync.replicas   2   
-	segment.bytes         536870912   
-	retention.ms          86400000   
-	retention.bytes       104857600   
-	OK
-	```
- 
-1. Delete an existing topic.
-
-	```console
-	$ ibmcloud es topic-delete greetings2
-
-	Really delete topic 'greetings'? [y/N]> y
-	Topic greetings deleted successfully
-	OK
-	```
-
-1. List all topics.
-
-	```console
-	$ ibmcloud es topics
-	OK
-	No topics found.
-	```
-
-1. List all consumer groups.
-
-	```console
-	$ ibmcloud es groups
-	
-	OK
-	No consumer groups found.
-	```
+* IBM Event Streams Documentation, https://ibm.github.io/event-streams/getting-started/using-kafka-console-tools/
+* Apache Kafka, https://kafka.apache.org/intro
